@@ -6,8 +6,7 @@ class Game {
         this.games = 0;   
         this.winGames = 0;
         this.loseGames = 0  
-        this.win = false;     
-        
+        this.win = false;      
     }
     initialFunction(){
         this.input = document.querySelector('input'); 
@@ -19,8 +18,7 @@ class Game {
         this.winGamesPlace = document.querySelector('.win');
         this.infoPopup = document.querySelector('.popup')
         this.valuePlace.innerText += parseInt(this.money) ;                                
-        this.handleClick();
-        
+        this.handleClick(); 
     }
     randomizing() {
         return parseInt(Math.floor((Math.random() * 3))) ;
@@ -31,7 +29,13 @@ class Game {
              display.style.backgroundColor = this.colors[index];
         })
         
-    }            
+    }    
+    handleClick(){
+        this.button.addEventListener('click',(e)=>{
+            e.preventDefault();                    
+            this.betting();
+        })
+    }        
     betting(){
         this.bet =  parseInt(document.querySelector('input').value);
 
@@ -45,19 +49,12 @@ class Game {
             alert('zła stawka');
             
         }
-        else{1                    
+        else{                   
             this.setColors();
             this.checkWin();
             this.games+=1;
             this.gamesPlace.innerText = this.games;                    
         }
-        
-    }
-    handleClick(){
-        this.button.addEventListener('click',(e)=>{
-            e.preventDefault();                    
-            this.betting();
-        })
     }
     winGame(){
         this.win = true;
@@ -85,8 +82,6 @@ class Game {
         this.valuePlace.innerText = this.money -= this.bet;
         this.infoPopup.innerText = `Przegrałeś ${this.bet}$`
         }
-
     }
-   
 }
 new Game(100).initialFunction();
